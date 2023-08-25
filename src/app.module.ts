@@ -6,9 +6,11 @@ import {
 } from '@nestjs/common';
 import { AppController, TestController } from './app.controller';
 import { AppService } from './app.service';
+import { LoginModule } from './routes/login/login.module';
 import { TestMiddleware, TestMiddleware2 } from './middleware/TestMiddleware';
+import { MainDBModule } from '@/database/main/main.module';
 @Module({
-  imports: [],
+  imports: [LoginModule, MainDBModule],
   controllers: [AppController, TestController], //TestController추가
   providers: [AppService],
 })
