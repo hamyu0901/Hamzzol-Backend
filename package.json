@@ -27,7 +27,8 @@
     "connect-history-api-fallback": "^2.0.0",
     "pg": "^8.11.3",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "util": "^0.12.5"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",
