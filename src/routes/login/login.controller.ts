@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { LoginService } from '@/routes/login/login.service';
 @Controller()
 export class LoginController {
@@ -6,6 +6,10 @@ export class LoginController {
   @Get('login')
   getUserInfo() {
     return this.loginService.getUserInfo();
+  }
+  @Get('login/compare')
+  getCompareUserInfo(@Query() params: { id: string; password: string }) {
+    return this.loginService.getCompareUserInfo(params);
   }
   @Get('login/security/type')
   getSecurityQATypeInfo() {

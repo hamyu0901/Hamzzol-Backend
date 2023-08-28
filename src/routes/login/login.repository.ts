@@ -9,6 +9,10 @@ export class LoginRepository {
     const result = await this.mainDBService.query(query);
     return result.rows;
   }
+  async getCompareUserInfo(): Promise<any> {
+    const query = 'SELECT * FROM user_config';
+    return await this.mainDBService.query(query);
+  }
   async getSecurityQATypeInfo(): Promise<any> {
     const query = 'SELECT * FROM def_security_type';
     const result = await this.mainDBService.query(query);
