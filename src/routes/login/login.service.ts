@@ -6,39 +6,35 @@ import { promisify } from 'util';
 @Injectable()
 export class LoginService {
   constructor(private readonly loginRepository: LoginRepository) {}
-  async getUserInfo(): Promise<any> {
-    return await this.loginRepository.getUserInfo();
+  async getUserInfo(id: string): Promise<any> {
+    return await this.loginRepository.getUserInfo(id);
   }
   async getCompareUserInfo(params: {
     id: string;
     password: string;
   }): Promise<any> {
-    const userInfo = await this.loginRepository.getUserInfo();
+    const userInfo = await this.loginRepository.getUserInfo(params.id);
     if (!isEmpty(userInfo)) {
-      const foundUser = userInfo.find((user) => user.user_id === params.id);
-      if (foundUser) {
-        try {
-          const compare = promisify(bcrypt.compare);
-          const result = await compare(
-            params.password,
-            foundUser.user_password,
-          );
-          return result ? foundUser : 'Incorrect password';
-        } catch (err) {
-          //에러 처리
-          return 'err';
-        }
-      } else {
-        // 일치하는 사용자가 없음
-        return 'Not User';
+      try {
+        const compare = promisify(bcrypt.compare);
+        const result = await compare(
+          params.password,
+          userInfo[0].user_password,
+        );
+        return result ? userInfo[0] : 'Incorrect password';
+      } catch (err) {
+        return 'err';
       }
     }
-    return '';
+    return 'Not User';
   }
   async getSecurityQATypeInfo(): Promise<any> {
     return await this.loginRepository.getSecurityQATypeInfo();
   }
   async postUserInfo(body: any): Promise<any> {
     return await this.loginRepository.postUserInfo(body);
+  }
+  async patchUserInfo(id: string, body: any): Promise<any> {
+    return await this.loginRepository.patchUserInfo(id, body);
   }
 }
