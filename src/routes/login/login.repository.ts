@@ -4,14 +4,10 @@ import { MainDBService } from '@/database/main/main.service';
 @Injectable()
 export class LoginRepository {
   constructor(private readonly mainDBService: MainDBService) {}
-  async getUserInfo(): Promise<any> {
-    const query = 'SELECT * FROM user_config';
+  async getUserInfo(id: string): Promise<any> {
+    const query = `SELECT * FROM user_config WHERE user_id = '${id}'`;
     const result = await this.mainDBService.query(query);
     return result.rows;
-  }
-  async getCompareUserInfo(): Promise<any> {
-    const query = 'SELECT * FROM user_config';
-    return await this.mainDBService.query(query);
   }
   async getSecurityQATypeInfo(): Promise<any> {
     const query = 'SELECT * FROM def_security_type';
@@ -30,6 +26,15 @@ export class LoginRepository {
         body.typeId,
         body.typeAnswer,
       ],
+    };
+    await this.mainDBService.query(query);
+  }
+  async patchUserInfo(id: string, body: any): Promise<any> {
+    const salt = await bcrypt.genSalt();
+    const hashedPassword = await bcrypt.hash(body.password, salt);
+    const query = {
+      text: `UPDATE user_config SET user_password=$2 WHERE user_id=$1`,
+      values: [body.id, hashedPassword],
     };
     await this.mainDBService.query(query);
   }
