@@ -23,6 +23,7 @@
     "@nestjs/common": "^10.0.0",
     "@nestjs/core": "^10.0.0",
     "@nestjs/platform-express": "^10.0.0",
+    "@types/pg": "^8.10.2",
     "bcryptjs": "^2.4.3",
     "connect-history-api-fallback": "^2.0.0",
     "pg": "^8.11.3",
