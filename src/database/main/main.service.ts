@@ -7,7 +7,10 @@ import { Pool } from 'pg';
 import { mainDatabaseConfig } from '@/database/config/database.config';
 @Injectable()
 export class MainDBService implements OnModuleInit, OnApplicationShutdown {
-  private pool: Pool = {};
+  private pool: Pool;
+  constructor() {
+    this.createMainDBPool();
+  }
   async onModuleInit(): Promise<void> {
     this.createMainDBPool();
   }
