@@ -7,10 +7,11 @@ import {
 import { AppController, TestController } from './app.controller';
 import { AppService } from './app.service';
 import { LoginModule } from './routes/login/login.module';
+import { CommonModule } from './routes/common/common.module';
 import { TestMiddleware, TestMiddleware2 } from './middleware/TestMiddleware';
 import { MainDBModule } from '@/database/main/main.module';
 @Module({
-  imports: [LoginModule, MainDBModule],
+  imports: [LoginModule, MainDBModule, CommonModule],
   controllers: [AppController, TestController], //TestController추가
   providers: [AppService],
 })
