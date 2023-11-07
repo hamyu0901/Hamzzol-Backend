@@ -2,9 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AppService {
-  constructor() {
-    console.log('서비스 생성');
-  }
+  constructor() {}
   getHello(): string {
     return 'Hello World!';
   }
