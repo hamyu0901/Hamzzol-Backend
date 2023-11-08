@@ -7,7 +7,6 @@ export class AppController {
 
   @Get()
   getHello(): string {
-    console.log('hello################')
     return this.appService.getHello();
   }
 }
@@ -24,12 +23,10 @@ export class TestController {
   }
   @Get('middleware-test')
   getTestMiddleware(): string {
-    console.log('middleware-test 컨트롤러');
     return 'middleware-test 컨트롤러';
   }
   @Get('middleware-test2')
   getTestMiddleware2(): string {
-    console.log('middleware-test2 컨트롤러');
     return 'middleware-test2 컨트롤러';
   }
 }

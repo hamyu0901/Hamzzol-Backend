@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Param, Patch, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { PlannerService } from '@/routes/planner/planner.service';
 import { IPostTodoListItemType } from '@/utils/interface/planner';
 @Controller()
@@ -16,5 +25,13 @@ export class PlannerController {
     @Param() params: { id: number },
   ) {
     return this.plannerService.patchPlannerList(body, params.id);
+  }
+  @Post('planner')
+  postPlannerList(@Body() body: IPostTodoListItemType) {
+    return this.plannerService.postPlannerList(body);
+  }
+  @Delete('planner/id/:id')
+  deletePlannerList(@Param() params: { id: number }) {
+    return this.plannerService.deletePlannerList(params.id);
   }
 }

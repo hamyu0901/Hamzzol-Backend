@@ -6,6 +6,8 @@ interface IPostTodoListItemType {
   update_time: any;
   contents: string;
   check_list: boolean;
+  date_range: string[];
+  color: string;
 }
 
 export { IPostTodoListItemType };
